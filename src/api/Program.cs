@@ -11,6 +11,7 @@ using Chefio.Application.Interfaces.Repositories;
 using Chefio.Application.Interfaces.Services;
 using Chefio.Application.Services;
 using Chefio.Api.Examples.Employee;
+using Chefio.Api.Examples.Category;
 using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.Annotations;
 using Microsoft.AspNetCore.Mvc;
@@ -79,6 +80,7 @@ builder.Services.AddSwaggerGen(options =>
 
 
 builder.Services.AddSwaggerExamplesFromAssemblyOf<EmployeeCreateRequestExample>();
+builder.Services.AddSwaggerExamplesFromAssemblyOf<CategoryCreateRequestExample>();
 builder.Services.AddEndpointsApiExplorer();
 
 // DbContext MySQL
@@ -89,6 +91,8 @@ builder.Services.AddDbContext<ChefioDbContext>(options =>
 // Đăng ký DI
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 builder.Services.AddAuthentication(options =>
