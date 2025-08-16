@@ -1,0 +1,47 @@
+# Ignore build output
+bin/
+obj/
+
+# Ignore app settings in api project
+src/api/appsettings.json
+src/api/appsettings.*.json
+
+# Ignore user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore Rider settings
+.idea/
+
+# Ignore NuGet packages
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+# Ignore logs
+*.log
+
+# Ignore OS generated files
+Thumbs.db
+.DS_Store
+
+# Ignore temp files
+*.swp
+*.tmp
+*.bak
+*.orig
+
+# Ignore test results
+TestResults/
+
+# Ignore coverage reports
+coverage/
+
+# Ignore publish output
+publish/
