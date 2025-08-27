@@ -93,6 +93,9 @@ builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IDishRepository, DishRepository>();
+builder.Services.AddScoped<IFirebaseStorageService, FirebaseStorageService>();
+builder.Services.AddScoped<IDishService, DishService>();
 
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 builder.Services.AddAuthentication(options =>
@@ -126,4 +129,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+var addresses = app.Urls.Any() ? app.Urls : new[] { "http://localhost:5000" };
+foreach (var addr in addresses)
+{
+    Console.WriteLine($"Swagger UI: {addr}/swagger/index.html");
+}
 app.Run();
