@@ -30,7 +30,7 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> SignUp([FromBody] SignUpRequest request)
     {
         if (_context.Accounts.Any(a => a.Username == request.Username))
-            return BadRequest(new ApiResponse(ApiStatus.Error, "Username already exists"));
+            return BadRequest(new ApiResponse(ApiStatus.Error, "Tên đăng nhập đã tồn tại"));
 
         var account = new Account
         {
@@ -42,7 +42,7 @@ public class AuthController : ControllerBase
 
         _context.Accounts.Add(account);
         await _context.SaveChangesAsync();
-        return Ok(new ApiResponse(ApiStatus.Success, "Sign up successful"));
+        return Ok(new ApiResponse(ApiStatus.Success, "Đăng ký thành công"));
     }
 
     [HttpPost("login")]
@@ -51,10 +51,10 @@ public class AuthController : ControllerBase
     {
         var account = _context.Accounts.FirstOrDefault(a => a.Username == request.Username && a.IsActive);
         if (account == null || !BCrypt.Net.BCrypt.Verify(request.Password, account.Password))
-            return BadRequest(new ApiResponse(ApiStatus.Error, "Invalid username or password"));
+            return BadRequest(new ApiResponse(ApiStatus.Error, "Tên đăng nhập hoặc mật khẩu không hợp lệ"));
 
         var token = GenerateJwtToken(account);
-        return Ok(new ApiResponse(ApiStatus.Success, "Login successful", new { token }));
+        return Ok(new ApiResponse(ApiStatus.Success, "Đăng nhập thành công", new { token }));
     }
 
     private string GenerateJwtToken(Account account)

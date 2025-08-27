@@ -23,7 +23,7 @@ public class EmployeeController : ControllerBase
     public async Task<IActionResult> Get(int page = 1, int pageSize = 10)
     {
         var employees = await _service.GetAllAsync(page, pageSize);
-        return Ok(new ApiResponse(ApiStatus.Success, "Get employee list successful", employees));
+        return Ok(new ApiResponse(ApiStatus.Success, "Lấy danh sách nhân viên thành công", employees));
     }
 
     [HttpGet("{id}")]
@@ -32,9 +32,9 @@ public class EmployeeController : ControllerBase
     {
         var employee = await _service.GetByIdAsync(id);
         if (employee == null)
-            return NotFound(new ApiResponse(ApiStatus.Error, "Employee not found"));
+            return NotFound(new ApiResponse(ApiStatus.Error, "Không tìm thấy nhân viên"));
 
-        return Ok(new ApiResponse(ApiStatus.Success, "Get employee successful", new { employee }));
+        return Ok(new ApiResponse(ApiStatus.Success, "Lấy thông tin nhân viên thành công", new { employee }));
     }
 
     [HttpPost]
@@ -48,7 +48,7 @@ public class EmployeeController : ControllerBase
         try
         {
             var result = await _service.CreateAsync(request);
-            return Ok(new ApiResponse(ApiStatus.Success, "Create employee successful", new { result }));
+            return Ok(new ApiResponse(ApiStatus.Success, "Thêm nhân viên thành công", new { result }));
         }
         catch (ArgumentException ex)
         {
@@ -67,9 +67,9 @@ public class EmployeeController : ControllerBase
         {
             var result = await _service.UpdateAsync(id, request);
             if (result == null)
-                return NotFound(new ApiResponse(ApiStatus.Error, "Employee not found"));
+                return NotFound(new ApiResponse(ApiStatus.Error, "Không tìm thấy nhân viên"));
 
-            return Ok(new ApiResponse(ApiStatus.Success, "Update employee successful", new { result }));
+            return Ok(new ApiResponse(ApiStatus.Success, "Cập nhật nhân viên thành công", new { result }));
         }
         catch (ArgumentException ex)
         {
@@ -83,9 +83,9 @@ public class EmployeeController : ControllerBase
     {
         var deleted = await _service.DeleteAsync(id);
         if (!deleted)
-            return NotFound(new ApiResponse(ApiStatus.Error, "Employee not found"));
+            return NotFound(new ApiResponse(ApiStatus.Error, "Không tìm thấy nhân viên"));
 
-        return Ok(new ApiResponse(ApiStatus.Success, "Delete employee successful"));
+        return Ok(new ApiResponse(ApiStatus.Success, "Xóa nhân viên thành công"));
     }
     
 }

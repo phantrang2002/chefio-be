@@ -4,6 +4,6 @@ namespace Chefio.Application.Dtos.Category;
 
 public class CategoryCreateRequest
 {
-    [Required(ErrorMessage = "Name is required.")]
+    [Required(ErrorMessage = "Cần thêm tên danh mục")]
     public string Name { get; set; }
 }

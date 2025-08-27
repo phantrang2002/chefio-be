@@ -9,9 +9,9 @@ namespace Chefio.Api.Examples.Employee
         {
             return new EmployeeCreateRequest
             {
-                FullName = "John Doe", 
-                Address = "123 Main St, Springfield, USA",
-                Note = "New employee onboarding",
+                FullName = "Vũ Quang Được", 
+                Address = "96 Định Công, Hà Nội",
+                Note = "Người Hàn",
             };
         }
     }

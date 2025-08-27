@@ -9,7 +9,7 @@ namespace Chefio.Api.Examples.Category
         {
             return new CategoryCreateRequest
             {
-                Name = "Main Course"
+                Name = "Món chính"
             };
         }
     }

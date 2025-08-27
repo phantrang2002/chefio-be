@@ -51,11 +51,11 @@ namespace Chefio.Application.Services
             var accountExists = await _repository.AccountExistsAsync(request.AccountId);
 
             if (!accountExists)
-                throw new ArgumentException("Account Id does not exist.");
+                throw new ArgumentException("ID tài khoản không tồn tại.");
 
             var existingEmployee = await _repository.GetByAccountIdAsync(request.AccountId);
             if (existingEmployee != null)
-                throw new ArgumentException($"Account Id {request.AccountId} is linked to employee: {existingEmployee.FullName} (Id: {existingEmployee.Id})");
+                throw new ArgumentException($"ID tài khoản {request.AccountId} đã được liên kết với nhân viên: {existingEmployee.FullName} (ID: {existingEmployee.Id})");
 
 
             var employee = new Employee
@@ -93,11 +93,11 @@ namespace Chefio.Application.Services
             if (request.AccountId.HasValue)
             {
                 if (!await _repository.AccountExistsAsync(request.AccountId.Value))
-                    throw new ArgumentException("Account Id does not exist.");
+                    throw new ArgumentException("ID tài khoản không tồn tại.");
 
                 var existingEmployee = await _repository.GetByAccountIdAsync(request.AccountId.Value);
                 if (existingEmployee != null && existingEmployee.Id != id)
-                    throw new ArgumentException($"Account Id {request.AccountId.Value} is linked to employee: {existingEmployee.FullName} (Id: {existingEmployee.Id})");
+                    throw new ArgumentException($"ID tài khoản {request.AccountId.Value} đã được liên kết với nhân viên: {existingEmployee.FullName} (ID: {existingEmployee.Id})");
 
                 employee.AccountId = request.AccountId.Value;
             }

@@ -23,7 +23,7 @@ public class CategoryController : ControllerBase
     public async Task<IActionResult> Get(int page = 1, int pageSize = 10)
     {
         var categories = await _service.GetAllAsync(page, pageSize);
-        return Ok(new ApiResponse(ApiStatus.Success, "Get category list successful", categories));
+        return Ok(new ApiResponse(ApiStatus.Success, "Lấy danh sách danh mục thành công", categories));
     }
 
     [HttpGet("{id}")]
@@ -32,9 +32,9 @@ public class CategoryController : ControllerBase
     {
         var category = await _service.GetByIdAsync(id);
         if (category == null)
-            return NotFound(new ApiResponse(ApiStatus.Error, "Category not found"));
+            return NotFound(new ApiResponse(ApiStatus.Error, "Không tìm thấy danh mục"));
 
-        return Ok(new ApiResponse(ApiStatus.Success, "Get category successful", new { category }));
+        return Ok(new ApiResponse(ApiStatus.Success, "Lấy thông tin danh mục thành công", new { category }));
     }
 
     [HttpPost]
@@ -48,7 +48,7 @@ public class CategoryController : ControllerBase
         try
         {
             var result = await _service.CreateAsync(request);
-            return Ok(new ApiResponse(ApiStatus.Success, "Create category successful", new { result }));
+            return Ok(new ApiResponse(ApiStatus.Success, "Thêm danh mục thành công", new { result }));
         }
         catch (ArgumentException ex)
         {
@@ -67,9 +67,9 @@ public class CategoryController : ControllerBase
         {
             var result = await _service.UpdateAsync(id, request);
             if (result == null)
-                return NotFound(new ApiResponse(ApiStatus.Error, "Category not found"));
+                return NotFound(new ApiResponse(ApiStatus.Error, "Không tìm thấy danh mục"));
 
-            return Ok(new ApiResponse(ApiStatus.Success, "Update category successful", new { result }));
+            return Ok(new ApiResponse(ApiStatus.Success, "Cập nhật danh mục thành công", new { result }));
         }
         catch (ArgumentException ex)
         {
@@ -83,9 +83,9 @@ public class CategoryController : ControllerBase
     {
         var deleted = await _service.DeleteAsync(id);
         if (!deleted)
-            return NotFound(new ApiResponse(ApiStatus.Error, "Category not found"));
+            return NotFound(new ApiResponse(ApiStatus.Error, "Không tìm thấy danh mục"));
 
-        return Ok(new ApiResponse(ApiStatus.Success, "Delete category successful"));
+        return Ok(new ApiResponse(ApiStatus.Success, "Xóa danh mục thành công"));
     }
     
 }
