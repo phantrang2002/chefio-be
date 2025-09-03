@@ -24,10 +24,15 @@ namespace Chefio.Application.Services
             {
                 Id = e.Id,
                 FullName = e.FullName,
-                AccountId = e.AccountId,
                 Address = e.Address,
                 Note = e.Note,
-            });
+                AccountId = e.AccountId,
+                Account = new AccountDto
+                {
+                    Id = e.Account.Id,
+                    Role = e.Account.Role.ToString()
+                }
+            }).ToList();
         }
 
         public async Task<EmployeeDto> GetByIdAsync(int id)

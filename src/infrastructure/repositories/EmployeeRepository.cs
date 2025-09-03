@@ -24,6 +24,7 @@ public class EmployeeRepository : IEmployeeRepository
     public async Task<IEnumerable<Employee>> GetAllAsync(int page, int pageSize)
     {
         return await _context.Employees
+            .Include(e => e.Account)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
