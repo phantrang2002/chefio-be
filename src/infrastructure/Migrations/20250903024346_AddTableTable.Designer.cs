@@ -4,6 +4,7 @@ using Chefio.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,14 +12,16 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace infrastructure.Migrations
 {
     [DbContext(typeof(ChefioDbContext))]
-    partial class ChefioDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250903024346_AddTableTable")]
+    partial class AddTableTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.13")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64); 
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Chefio.Domain.Entities.Account", b =>
                 {

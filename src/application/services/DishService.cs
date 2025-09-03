@@ -111,6 +111,8 @@ namespace Chefio.Application.Services
             dish.Price = request.Price;
             dish.CategoryId = request.CategoryId;
             dish.isAvailable = request.IsAvailable;
+            dish.UpdatedAt = DateTime.UtcNow;
+
 
             await _repository.UpdateAsync(dish);
             await _repository.SaveChangesAsync();

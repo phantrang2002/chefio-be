@@ -11,7 +11,7 @@ public class ChefioDbContext : DbContext
     public DbSet<Account> Accounts { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Dish> Dishes { get; set; }
-
+    public DbSet<Table> Tables { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
