@@ -1,6 +1,7 @@
-# 🚀 WorkNest  
+# 🚀 Chefio  
 
-An online job portal for recruitment and job searching.  
+Chefio is a management platform for restaurants, cafés, and food businesses.
+It helps owners and staff streamline daily operations, improve efficiency, and deliver better customer experiences.
 
 ## 📌 Table of Contents  
 - [👥 Authors](#-authors)  
