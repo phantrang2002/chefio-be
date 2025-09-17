@@ -1,6 +1,6 @@
 # 🚀 Chefio  
 
-Chefio is a management platform for restaurants, cafés, and food businesses.
+Chefio is a management platform for restaurants, cafés, and food businesses, offers support for using hardware like POS machines
 It helps owners and staff streamline daily operations, improve efficiency, and deliver better customer experiences.
 
 ## 📌 Table of Contents  
