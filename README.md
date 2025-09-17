@@ -14,7 +14,7 @@ It helps owners and staff streamline daily operations, improve efficiency, and d
 - [@trangphan](https://www.linkedin.com/in/trang-phan-35b823156/)  
 
 ## 🛠 Tech Stack   
-**⚙️ :** ASP.NET Core Web API 8, MySQL, Entity Framework Core, MySQL, JWT Authentication, Google Firebase Storage.
+**⚙️ :** ASP.NET Core Web API 8, MySQL, Entity Framework Core, JWT Authentication, Google Firebase Storage.
 
 ## 💻 Run Locally  
 
