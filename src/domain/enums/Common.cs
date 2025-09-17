@@ -3,5 +3,13 @@ public enum ApiStatus
     Success,
     Error,
     Unauthorized,
-    NotFound, 
+    NotFound,
+}
+
+public enum OrderStatus
+{ 
+    Pending,
+    InProgress,
+    Completed,
+    Cancelled
 }
