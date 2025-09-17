@@ -12,6 +12,8 @@ using Chefio.Application.Interfaces.Services;
 using Chefio.Application.Services;
 using Chefio.Api.Examples.Employee;
 using Chefio.Api.Examples.Category;
+using Chefio.Api.Examples.Order;
+
 using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.Annotations;
 using Microsoft.AspNetCore.Mvc;
@@ -81,6 +83,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddSwaggerExamplesFromAssemblyOf<EmployeeCreateRequestExample>();
 builder.Services.AddSwaggerExamplesFromAssemblyOf<CategoryCreateRequestExample>();
+builder.Services.AddSwaggerExamplesFromAssemblyOf<OrderCreateRequestExample>();
 builder.Services.AddEndpointsApiExplorer();
 
 // DbContext MySQL
@@ -98,6 +101,8 @@ builder.Services.AddScoped<IFirebaseStorageService, FirebaseStorageService>();
 builder.Services.AddScoped<IDishService, DishService>();
 builder.Services.AddScoped<ITableRepository, TableRepository>();
 builder.Services.AddScoped<ITableService, TableService>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 builder.Services.AddAuthentication(options =>
