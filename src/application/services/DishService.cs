@@ -6,6 +6,8 @@ using Chefio.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Chefio.Application.Constants;
+
 
 namespace Chefio.Application.Services
 {
@@ -58,7 +60,7 @@ namespace Chefio.Application.Services
             // Kiểm tra CategoryId
             var category = await _categoryRepository.GetByIdAsync(request.CategoryId);
             if (category == null)
-                throw new ArgumentException("Danh mục không tồn tại");
+                throw new ArgumentException(ApiMessages.CATEGORY.NOT_FOUND.Message);
 
             string photoUrl = null;
             if (request.Photo != null && request.Photo.Length > 0)
@@ -97,7 +99,7 @@ namespace Chefio.Application.Services
             // Kiểm tra CategoryId
             var category = await _categoryRepository.GetByIdAsync(request.CategoryId);
             if (category == null)
-                throw new ArgumentException("Danh mục không tồn tại");
+                throw new ArgumentException(ApiMessages.CATEGORY.NOT_FOUND.Message);
 
             string photoUrl = dish.photo;
             if (request.Photo != null && request.Photo.Length > 0)

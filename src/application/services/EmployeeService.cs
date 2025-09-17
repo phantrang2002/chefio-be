@@ -5,6 +5,7 @@ using Chefio.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Chefio.Application.Constants;
 
 namespace Chefio.Application.Services
 {
@@ -24,10 +25,15 @@ namespace Chefio.Application.Services
             {
                 Id = e.Id,
                 FullName = e.FullName,
-                AccountId = e.AccountId,
                 Address = e.Address,
                 Note = e.Note,
-            });
+                AccountId = e.AccountId,
+                Account = new AccountDto
+                {
+                    Id = e.Account.Id,
+                    Role = e.Account.Role.ToString()
+                }
+            }).ToList();
         }
 
         public async Task<EmployeeDto> GetByIdAsync(int id)
@@ -51,7 +57,7 @@ namespace Chefio.Application.Services
             var accountExists = await _repository.AccountExistsAsync(request.AccountId);
 
             if (!accountExists)
-                throw new ArgumentException("ID tài khoản không tồn tại.");
+                throw new ArgumentException(ApiMessages.ACCOUNT.NOT_FOUND.Message);
 
             var existingEmployee = await _repository.GetByAccountIdAsync(request.AccountId);
             if (existingEmployee != null)
@@ -93,7 +99,7 @@ namespace Chefio.Application.Services
             if (request.AccountId.HasValue)
             {
                 if (!await _repository.AccountExistsAsync(request.AccountId.Value))
-                    throw new ArgumentException("ID tài khoản không tồn tại.");
+                    throw new ArgumentException(ApiMessages.ACCOUNT.NOT_FOUND.Message);
 
                 var existingEmployee = await _repository.GetByAccountIdAsync(request.AccountId.Value);
                 if (existingEmployee != null && existingEmployee.Id != id)

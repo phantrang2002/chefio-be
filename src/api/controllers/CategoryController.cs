@@ -6,6 +6,7 @@ using Chefio.Application.Dtos.Category;
 using Chefio.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using System;
+using Chefio.Application.Constants;
 
 [ApiController]
 [Route("/category")]
@@ -23,7 +24,7 @@ public class CategoryController : ControllerBase
     public async Task<IActionResult> Get(int page = 1, int pageSize = 10)
     {
         var categories = await _service.GetAllAsync(page, pageSize);
-        return Ok(new ApiResponse(ApiStatus.Success, "Lấy danh sách danh mục thành công", categories));
+        return Ok(new ApiResponse(ApiStatus.Success, ApiMessages.CATEGORY.LIST_SUCCESS.Message, categories));
     }
 
     [HttpGet("{id}")]
@@ -32,9 +33,9 @@ public class CategoryController : ControllerBase
     {
         var category = await _service.GetByIdAsync(id);
         if (category == null)
-            return NotFound(new ApiResponse(ApiStatus.Error, "Không tìm thấy danh mục"));
+            return NotFound(new ApiResponse(ApiStatus.Error, ApiMessages.CATEGORY.NOT_FOUND.Message));
 
-        return Ok(new ApiResponse(ApiStatus.Success, "Lấy thông tin danh mục thành công", new { category }));
+        return Ok(new ApiResponse(ApiStatus.Success, ApiMessages.CATEGORY.GET_SUCCESS.Message, new { category }));
     }
 
     [HttpPost]
@@ -48,7 +49,7 @@ public class CategoryController : ControllerBase
         try
         {
             var result = await _service.CreateAsync(request);
-            return Ok(new ApiResponse(ApiStatus.Success, "Thêm danh mục thành công", new { result }));
+            return Ok(new ApiResponse(ApiStatus.Success, ApiMessages.CATEGORY.CREATE_SUCCESS.Message, new { result }));
         }
         catch (ArgumentException ex)
         {
@@ -67,9 +68,9 @@ public class CategoryController : ControllerBase
         {
             var result = await _service.UpdateAsync(id, request);
             if (result == null)
-                return NotFound(new ApiResponse(ApiStatus.Error, "Không tìm thấy danh mục"));
+                return NotFound(new ApiResponse(ApiStatus.Error, ApiMessages.CATEGORY.NOT_FOUND.Message));
 
-            return Ok(new ApiResponse(ApiStatus.Success, "Cập nhật danh mục thành công", new { result }));
+            return Ok(new ApiResponse(ApiStatus.Success, ApiMessages.CATEGORY.UPDATE_SUCCESS.Message, new { result }));
         }
         catch (ArgumentException ex)
         {
@@ -83,9 +84,9 @@ public class CategoryController : ControllerBase
     {
         var deleted = await _service.DeleteAsync(id);
         if (!deleted)
-            return NotFound(new ApiResponse(ApiStatus.Error, "Không tìm thấy danh mục"));
+            return NotFound(new ApiResponse(ApiStatus.Error, ApiMessages.CATEGORY.NOT_FOUND.Message));
 
-        return Ok(new ApiResponse(ApiStatus.Success, "Xóa danh mục thành công"));
+        return Ok(new ApiResponse(ApiStatus.Success, ApiMessages.CATEGORY.DELETE_SUCCESS.Message));
     }
     
 }

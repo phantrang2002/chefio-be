@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using Chefio.Application.Constants;
+
 
 [ApiController]
 [Route("/table")]
@@ -21,12 +23,12 @@ public class TableController : ControllerBase
     public async Task<IActionResult> CreateTables([FromBody] TableCreateRequest request)
     {
         if (request.Quantity <= 0)
-            return BadRequest(new ApiResponse(ApiStatus.Error, "Số lượng bàn phải lớn hơn 0"));
+            return BadRequest(new ApiResponse(ApiStatus.Error, ApiMessages.TABLE.QUANTITY_INVALID.Message));
 
         try
         {
             var result = await _service.CreateTablesAsync(request.Quantity);
-            return Ok(new ApiResponse(ApiStatus.Success, "Tạo bàn thành công", result));
+            return Ok(new ApiResponse(ApiStatus.Success, ApiMessages.TABLE.CREATE_SUCCESS.Message, result));
         }
         catch (ArgumentException ex)
         {
@@ -45,9 +47,9 @@ public class TableController : ControllerBase
         {
             var result = await _service.UpdateStatusAsync(id, request.IsAvailable);
             if (result == null)
-                return NotFound(new ApiResponse(ApiStatus.Error, "Không tìm thấy bàn"));
+                return NotFound(new ApiResponse(ApiStatus.Error, ApiMessages.TABLE.NOT_FOUND.Message));
 
-            return Ok(new ApiResponse(ApiStatus.Success, "Cập nhật trạng thái bàn thành công", new { result }));
+            return Ok(new ApiResponse(ApiStatus.Success, ApiMessages.TABLE.UPDATE_SUCCESS.Message, new { result }));
         }
         catch (ArgumentException ex)
         {
@@ -61,9 +63,9 @@ public class TableController : ControllerBase
     {
         var deleted = await _service.DeleteAsync(id);
         if (!deleted)
-            return NotFound(new ApiResponse(ApiStatus.Error, "Không tìm thấy bàn"));
+            return NotFound(new ApiResponse(ApiStatus.Error, ApiMessages.TABLE.NOT_FOUND.Message));
 
-        return Ok(new ApiResponse(ApiStatus.Success, "Xóa bàn thành công"));
+        return Ok(new ApiResponse(ApiStatus.Success, ApiMessages.TABLE.DELETE_SUCCESS.Message));
     }
 
     [HttpGet]
@@ -71,7 +73,7 @@ public class TableController : ControllerBase
     public async Task<IActionResult> Get(int page = 1, int pageSize = 10)
     {
         var tables = await _service.GetAllAsync(page, pageSize);
-        return Ok(new ApiResponse(ApiStatus.Success, "Lấy danh sách bàn thành công", tables));
+        return Ok(new ApiResponse(ApiStatus.Success, ApiMessages.TABLE.LIST_SUCCESS.Message, tables));
     }
 
     [HttpGet("{id}")]
@@ -80,8 +82,8 @@ public class TableController : ControllerBase
     {
         var table = await _service.GetByIdAsync(id);
         if (table == null)
-            return NotFound(new ApiResponse(ApiStatus.Error, "Không tìm thấy bàn"));
+            return NotFound(new ApiResponse(ApiStatus.Error, ApiMessages.TABLE.NOT_FOUND.Message));
 
-        return Ok(new ApiResponse(ApiStatus.Success, "Lấy thông tin bàn thành công", new { table }));
+        return Ok(new ApiResponse(ApiStatus.Success, ApiMessages.TABLE.GET_SUCCESS.Message, new { table }));
     }
 }

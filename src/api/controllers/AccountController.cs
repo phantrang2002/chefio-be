@@ -11,6 +11,7 @@ using System.Linq;
 using System;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Authorization;
+using Chefio.Application.Constants;
 
 [ApiController]
 [Route("auth")]
@@ -30,7 +31,7 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> SignUp([FromBody] SignUpRequest request)
     {
         if (_context.Accounts.Any(a => a.Username == request.Username))
-            return BadRequest(new ApiResponse(ApiStatus.Error, "Tên đăng nhập đã tồn tại"));
+            return BadRequest(new ApiResponse(ApiStatus.Error, ApiMessages.ACCOUNT.USERNAME_EXISTED.Message));
 
         var account = new Account
         {
@@ -42,7 +43,7 @@ public class AuthController : ControllerBase
 
         _context.Accounts.Add(account);
         await _context.SaveChangesAsync();
-        return Ok(new ApiResponse(ApiStatus.Success, "Đăng ký thành công"));
+        return Ok(new ApiResponse(ApiStatus.Success, ApiMessages.ACCOUNT.SIGNUP_SUCCESS.Message));
     }
 
     [HttpPost("login")]
@@ -51,10 +52,10 @@ public class AuthController : ControllerBase
     {
         var account = _context.Accounts.FirstOrDefault(a => a.Username == request.Username && a.IsActive);
         if (account == null || !BCrypt.Net.BCrypt.Verify(request.Password, account.Password))
-            return BadRequest(new ApiResponse(ApiStatus.Error, "Tên đăng nhập hoặc mật khẩu không hợp lệ"));
+            return BadRequest(new ApiResponse(ApiStatus.Error, ApiMessages.ACCOUNT.LOGIN_INVALID.Message));
 
         var token = GenerateJwtToken(account);
-        return Ok(new ApiResponse(ApiStatus.Success, "Đăng nhập thành công", new { token }));
+        return Ok(new ApiResponse(ApiStatus.Success, ApiMessages.ACCOUNT.LOGIN_SUCCESS.Message, new { token }));
     }
 
     private string GenerateJwtToken(Account account)

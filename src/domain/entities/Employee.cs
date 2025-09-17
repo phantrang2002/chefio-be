@@ -19,5 +19,7 @@ public class Employee : BaseEntity
     
     [Column("account_id")]
     public int AccountId { get; set; }
+    
+    public Account Account { get; set; } 
 
 }
