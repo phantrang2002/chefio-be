@@ -150,6 +150,36 @@ namespace Chefio.Application.Constants
 
         }
 
+         public static class ORDER
+        { 
+            public static class LIST_SUCCESS
+            {
+                public const string Message = "Lấy danh sách đơn hàng thành công";
+            }
+            public static class NOT_FOUND
+            {
+                public const string Message = "Không tìm thấy đơn hàng";
+            }
+            public static class GET_SUCCESS
+            {
+                public const string Message = "Lấy thông tin đơn hàng thành công";
+            }
+            public static class CREATE_SUCCESS 
+            {
+                public const string Message = "Thêm hóa đơn hàng thành công";
+            }
+            
+            public static class UPDATE_SUCCESS
+            {
+                public const string Message = "Cập nhật đơn hàng thành công";
+            }
+            public static class DELETE_SUCCESS
+            {
+                public const string Message = "Xóa đơn hàng thành công";
+            }      
+
+        }
+
          
     }
 }
